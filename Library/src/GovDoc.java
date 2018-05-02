@@ -1,37 +1,42 @@
+import java.util.Date;
 
 public class GovDoc extends Item{
+//////////////////////////////////Attributes////////////////////////////////////
 
+	private Date date;
 	LibraryContent library = new LibraryContent();
+	///////////////////////////////////////constructors//////////////////////////////////////
 
-	public GovDoc(String Title) {
-		setType("Government_Document");
-		setTitle(Title);
+	public GovDoc(String Title, int AccessLevelRequired) {
+		super(Title, AccessLevelRequired);
+		super.setType("Government_Document");
+		super.setID();
+		
 	}
-	@Override
-	public void setType(String itemType) {
-		super.itemType = itemType;
+	public GovDoc(String Title, int AccessLevelRequired, Date date) {
+		super(Title, AccessLevelRequired);
+		super.setType("Government_Document");
+		this.date=date;
+		//super.setID();
+		
 	}
-	@Override
-	public void setTitle(String Title) {
-		super.Title = Title;			
+	public GovDoc(String Title,String ItemType) {
+		super(Title, ItemType);
+		super.setAccessLevelRequired(4);
+		super.setID();
 	}
-	@Override
-	public void checkIn(Item item, PersonImpl person) {
-		library.getLibContent().add(item);		
+	/////////////////////////////////////////Methods///////////////////////////////////////////
+
+	public Date getDate() {
+		return date;
 	}
-	@Override
-	public void checkOut(Item item, PersonImpl person) {
-		if(person.AccessLevel>=5) {
-			library.getLibContent().remove(item);
-		}
-		else System.out.println(" ACCESS DENIED ");
+	public void setDate(Date date) {
+		this.date = date;
 	}
-	@Override
-	public void RemoveItem(Item item) {
-		library.getLibContent().remove(item);		
-	}
-	@Override
-	public void AddItem(Item item) {
-		library.getLibContent().add(item);		
-	}
+//	@Override
+//	public String toString() {
+//		return "GovDoc [Date=" + getDate() + ", Title=" + getTitle() + ", ItemType=" + getItemType()
+//				+ ", AccessLevelRequired=" + getAccessLevelRequired() +  "ID: "+getID()+"]";
+//	}
+	
 }

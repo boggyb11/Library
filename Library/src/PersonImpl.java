@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
 public class PersonImpl implements Person {
+//////////////////////////////////Attributes////////////////////////////////////
 
-	String Name;
-	String Occupation;
-	int ItemsHeld;
-	int AccessLevel;
-	ArrayList<Item> personsList;
+	private String Name;
+	private String Occupation;
+	private int ItemsHeld;
+	private int AccessLevel;
+	 ArrayList<Item> personsList;
 	
 	PersonList personList = new PersonList();
+	///////////////////////////////////////constructors//////////////////////////////////////
 	
 	PersonImpl(String Name, String Occupation, int AccessLevel){
 		this.Name= Name;
@@ -16,6 +18,8 @@ public class PersonImpl implements Person {
 		this.AccessLevel = AccessLevel;
 		personsList = new ArrayList<>();
 	}
+	/////////////////////////////////////////Methods///////////////////////////////////////////
+
 	@Override
 	public void setName(String Name) {
 		this.Name =Name;		
@@ -34,18 +38,22 @@ public class PersonImpl implements Person {
 	}
 	@Override
 	public void addItemsHeld(PersonImpl person, Item item ) {
-		item.checkOut(item, person);
-		person.personsList.add(item);
+		if(person.AccessLevel>=item.getAccessLevelRequired()) {
+			item.checkOut(item, person);
+			person.personsList.add(item);
+		}
+		else
+			System.out.println("ACCESS DENIED");
 	}
 	@Override
 	public void returnItem(PersonImpl person, Item item) {
 		item.checkIn(item, person);
-		person.personsList.add(item);
+		person.personsList.remove(item);
 	}
 	@Override
 	public ArrayList<Item> getItemsHeld(PersonImpl person) {
 		for(Item item: person.personsList) {
-			System.out.println(person.Name+" Has these Items : "+"[Title: " + item.Title + "] ");
+			System.out.println(person.Name+" Has these Items : "+"[Title: " + item.getTitle() + "] ");
 		}
 		if(person.personsList.isEmpty()) {
 			System.out.println(person.Name + " Has no items");

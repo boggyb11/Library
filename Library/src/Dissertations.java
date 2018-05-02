@@ -1,36 +1,44 @@
 
 public class Dissertations extends Item{
+//////////////////////////////////Attributes////////////////////////////////////
 
-	LibraryContent library = new LibraryContent();
+	private String Author;
 	
-	public Dissertations(String title) {
+	LibraryContent library = new LibraryContent();
+	///////////////////////////////////////constructors//////////////////////////////////////
+
+	public Dissertations(String Title, int AccessLevelRequired) {
+		super(Title, AccessLevelRequired);
 		setType("Dissertation");
-		setTitle(Title);	}
-	@Override
-	public void setType(String itemType) {
-		super.itemType = itemType;
+		super.setID();
+
+	
 	}
-	@Override
-	public void setTitle(String Title) {
-		super.Title = Title;
+	public Dissertations(String Title, int AccessLevelRequired, String Author) {
+		super(Title, AccessLevelRequired);
+		setType("Dissertation");
+		this.Author=Author;
+		//super.setID();
+
 	}
-	@Override
-	public void checkIn(Item item, PersonImpl person) {
-		library.getLibContent().add(item);			
+	public Dissertations(String Title,String ItemType) {
+		super(Title, ItemType);
+		super.setAccessLevelRequired(2);
+		super.setID();
 	}
-	@Override
-	public void checkOut(Item item, PersonImpl person) {
-		if(person.AccessLevel>=2) {
-			library.getLibContent().remove(item);
-		}
-		else System.out.println(" ACCESS DENIED ");
-	}		
-	@Override
-	public void RemoveItem(Item item) {
-		library.getLibContent().remove(item);			
+
+	/////////////////////////////////////////Methods///////////////////////////////////////////
+	public String getAuthor() {
+		return Author;
 	}
-	@Override
-	public void AddItem(Item item) {
-		library.getLibContent().add(item);		
+	public void setAuthor(String author) {
+		Author = author;
 	}
+//	@Override
+//	public String toString() {
+//		return "Dissertations [Autho)=" + getAuthor() + ", Titl)=" + getTitle() + ", ItemType="
+//				+ getItemType() + ", AccessLevelRequire)=" + getAccessLevelRequired() + "ID: "+getID()+ "]";
+//	}
+	
+
 }

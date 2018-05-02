@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 
 public class PersonList {
+//////////////////////////////////Attributes////////////////////////////////////
 
 	private static ArrayList<PersonImpl> PersonContent = new ArrayList<>();
+	///////////////////////////////////////constructors//////////////////////////////////////
+
+	/////////////////////////////////////////Methods///////////////////////////////////////////
 
 	public ArrayList<PersonImpl> getPersonContent() {
 		return PersonContent;
@@ -24,7 +28,7 @@ public class PersonList {
 	}
 	public PersonImpl getPerson(String Name) {
 		for(PersonImpl person : PersonContent) {
-			if (person.Name == Name) {
+			if (person.getName() == Name) {
 				return person;
 			}
 		}	

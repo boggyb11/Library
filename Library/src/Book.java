@@ -1,43 +1,44 @@
 
 public class Book extends Item{
 
-	
-	public Book(String Title, Genre genre) {
-		setTitle(Title);
-		setGenre(genre);
-		setType("Book");
-	}
+	//////////////////////////////////Attributes////////////////////////////////////
 	
 	LibraryContent library = new LibraryContent();
+	private Genre genre;
 
-	@Override
-	public void checkIn(Item item,  PersonImpl person) {
-		library.getLibContent().add(item);
+	///////////////////////////////////////constructors//////////////////////////////////////
+
+	public Book(String Title, int AccessLevelRequired) {
+		super(Title, AccessLevelRequired);
+		setType("Book");
+		super.setID();
+
 	}
-	@Override
-	public void checkOut(Item item, PersonImpl person) {
-		library.getLibContent().remove(item);
+	public Book(String Title, int AccessLevelRequired, Genre genre) {
+		super(Title, AccessLevelRequired);
+		setType("Book");
+
+		this.genre= genre;
+		//super.setID();
+
 	}
-	@Override
-	public void AddItem(Item item) {
-		library.getLibContent().add(item);
+	public Book(String Title,String ItemType) {
+		super(Title, ItemType);
+		super.setAccessLevelRequired(0);
+		super.setID();
 	}
-	@Override
-	public void RemoveItem(Item item) {
-		library.getLibContent().remove(item);
-	}
-	@Override
-	public void setTitle(String Title) {
-		super.Title = Title;		
-	}
+	/////////////////////////////////////////Methods///////////////////////////////////////////
+
 	public void setGenre(Genre genre) {
-		super.genre = genre;
+		this.genre = genre;
 	}
 	public Genre getGenre() {
 		return genre;
 	}
-	@Override
-	public void setType(String itemType) {
-		super.itemType = itemType;		
-	}
+//	@Override
+//	public String toString() {
+//		return "Book [Genre=" + getGenre() + ", Title=" + getTitle() + ", ItemType=" + getItemType()
+//				+ ", AccessLevelRequired=" + getAccessLevelRequired() + "ID: "+getID()+"]";
+//	}
+	
 }
